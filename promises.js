@@ -22,7 +22,7 @@ function enviarEmail(corpo, para) {
             // Os dois retornos "resolve" e "reject" só podem ter um unico parametro
 
             if (!deuErro) {
-                resolve({assunto:7, to: para}) // Promessa OK!
+                resolve({ass: 7, to: para}) // Promessa OK!
             } else {
                 reject() // não foi cumprida
             }
@@ -30,7 +30,7 @@ function enviarEmail(corpo, para) {
     });
 }
 
-// enviarEmail("Olá mundo","luiz.victor100@hotmail").then( ({ ass, to}) => { //.then((dados) => { 
+// enviarEmail("Olá mundo","luiz.victor100@hotmail").then( ({ass, to}) => { //.then((dados) => { 
 
 //     console.log(`
 //         Assunto: ${ass}
@@ -42,14 +42,38 @@ function enviarEmail(corpo, para) {
 //     console.log("Não foi dessa vez :(");
 // });
 
-pegarId().then((id) => {
-    buscarEmailNoBanco(id).then((email) => {
+// pegarId().then((id) => {
+//     buscarEmailNoBanco(id).then((email) => {
 
-        enviarEmail("Olá, como você está ?",email).then(() => {
-            console.log("Email enviado com sucesso para " + email);
-        }).catch(err => {
-            console.log(err);
-        })
+//         enviarEmail("Olá, como você está ?",email).then(() => {
+//             console.log("Email enviado com sucesso para " + email);
+//         }).catch(err => {
+//             console.log(err);
+//         })
 
+//     })
+// })
+
+function pegarUsuarios() {
+    return new Promise((resolve, reject) => {
+
+        setTimeout(() => {
+            resolve([
+                {name:"Smith", lang:"PHP"},
+                {name:"Gabbi", lang:"JS"},
+                {name:"Lucas", lang:"Python"}
+            ])
+        }, 1500);
+        
     })
-})
+}
+
+// await : fazo JS esperar a função ser concluida;
+// mas ele só funciona em funlçoes async (assíncrona)
+
+async function principal() {
+    var usuarios = await pegarUsuarios();
+    console.log(usuarios)
+}
+
+principal();
