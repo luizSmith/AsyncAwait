@@ -17,7 +17,7 @@ function buscarEmailNoBanco(id) {
 function enviarEmail(corpo, para) {
     return new Promise((resolve, reject) => {
         setTimeout(() => { //Arrow function
-            var deuErro = false;
+            var deuErro = true;
 
             // Os dois retornos "resolve" e "reject" só podem ter um unico parametro
 
@@ -84,11 +84,21 @@ async function mandaEmail(to) {
     var id = await pegarId(to)
     var email = await buscarEmailNoBanco(id);
 
-    enviarEmail("Como vai você ?",email).then(() => {
+    // enviarEmail("Como vai você ?",email).then(() => {
+    //     console.log("Email enviado com sucesso para " + email);
+    // }).catch(err => {
+    //     console.log("falha ao enviar email para " + email);
+    // })
+
+    //Caso não queira usar await  no enviarEmail()
+    try {
+        await enviarEmail("Como vai você ?",email);
         console.log("Email enviado com sucesso para " + email);
-    }).catch(err => {
+    } catch(erro) {
         console.log("falha ao enviar email para " + email);
-    })    
+        console.log(erro);
+    }    
+
 }
 
 mandaEmail(5);
