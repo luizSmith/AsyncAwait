@@ -30,6 +30,7 @@ function enviarEmail(corpo, para) {
     });
 }
 
+//evniando email
 // enviarEmail("Olá mundo","luiz.victor100@hotmail").then( ({ass, to}) => { //.then((dados) => { 
 
 //     console.log(`
@@ -76,4 +77,18 @@ async function principal() {
     console.log(usuarios)
 }
 
-principal();
+//principal();
+
+//evniando email Async Await
+async function mandaEmail(to) {
+    var id = await pegarId(to)
+    var email = await buscarEmailNoBanco(id);
+
+    enviarEmail("Como vai você ?",email).then(() => {
+        console.log("Email enviado com sucesso para " + email);
+    }).catch(err => {
+        console.log("falha ao enviar email para " + email);
+    })    
+}
+
+mandaEmail(5);
