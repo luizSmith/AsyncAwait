@@ -1,20 +1,21 @@
 function pegarId(){
     return new Promise((resolve, reject) => {
         setTimeout(() => {
-            resolve(3);
+            resolve(1);
         },2500);
     });
 }
 
-function buscarEmailNoBanco(id) {
-    let user = [
-        "huguinho@gmail.com",
-        "zezinho@gmail.com",
-        "luizinho@gmail.com"     
-    ];
+function buscarEmailNoBanco(id) {   
     return new Promise((resolve, reject) => {
+        var user = [
+            'huguinho@gmail.com',
+            'zezinho@gmail.com',
+            'luizinho@gmail.com'     
+        ];
+
         setTimeout(() => {
-            if (user.indexOf(id) != -1) {
+            if (Math.abs(id) < user.length) {
                 resolve(user[id]);
             } else {
                 reject(null);
@@ -27,7 +28,8 @@ function buscarEmailNoBanco(id) {
 function enviarEmail(corpo, para) {
     return new Promise((resolve, reject) => {
         setTimeout(() => { //Arrow function
-            var deuErro = false;
+            //define o erro para teste
+            var deuErro = true;
 
             // Os dois retornos "resolve" e "reject" só podem ter um unico parametro
 
